@@ -47,105 +47,130 @@ class CreateAccountScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: Stack(
-        children: [
-          Positioned(
-            top: 0,
-            left: 0,
-            right: 0,
-            child: ClipRRect(
-              borderRadius: BorderRadius.only(
-                bottomLeft:
-                    Radius.circular(MediaQuery.of(context).size.height * 0.10),
-              ),
-              child: Container(
-                height: MediaQuery.of(context).size.height * 0.40,
-                color: Color(0xffc47726),
-                child: Center(
-                  child: Stack(
-                    alignment: Alignment.center,
-                    children: [
-                      Positioned(
-                        top: MediaQuery.of(context).size.height * 0.015,
-                        child: Image.asset(
-                          'assets/images/logo.png',
-                          fit: BoxFit.contain,
-                          width: MediaQuery.of(context).size.width * 0.45,
-                          height: MediaQuery.of(context).size.height * 0.25,
+        body: Stack(
+          children: [
+            Positioned(
+              top: 0,
+              left: 0,
+              right: 0,
+              child: ClipRRect(
+                borderRadius: BorderRadius.only(
+                  bottomLeft: Radius.circular(
+                      MediaQuery.of(context).size.height * 0.10),
+                ),
+                child: Container(
+                  height: MediaQuery.of(context).size.height * 0.40,
+                  color: Color(0xffc47726),
+                  child: Center(
+                    child: Stack(
+                      alignment: Alignment.center,
+                      children: [
+                        Positioned(
+                          top: MediaQuery.of(context).size.height * 0.015,
+                          child: Image.asset(
+                            'assets/images/logo.png',
+                            fit: BoxFit.contain,
+                            width: MediaQuery.of(context).size.width * 0.45,
+                            height: MediaQuery.of(context).size.height * 0.25,
+                          ),
                         ),
-                      ),
-                      Positioned(
-                        top: MediaQuery.of(context).size.height * 0.25,
-                        child: Container(
-                          width: MediaQuery.of(context).size.width * 0.8,
-                          child: FittedBox(
-                            fit: BoxFit.scaleDown,
-                            child: Text(
-                              'Create Your\nAccount',
-                              style: TextStyle(
-                                fontFamily: 'SquadaOne',
-                                fontSize: 40,
-                                color: Color(0xff251a1a),
-                                fontWeight: FontWeight.w400,
+                        Positioned(
+                          top: MediaQuery.of(context).size.height * 0.25,
+                          child: Container(
+                            width: MediaQuery.of(context).size.width * 0.8,
+                            child: FittedBox(
+                              fit: BoxFit.scaleDown,
+                              child: Text(
+                                'Create Your\nAccount',
+                                style: TextStyle(
+                                  fontFamily: 'SquadaOne',
+                                  fontSize: 40,
+                                  color: Color(0xff251a1a),
+                                  fontWeight: FontWeight.w400,
+                                ),
+                                textAlign: TextAlign.center,
                               ),
-                              textAlign: TextAlign.center,
                             ),
                           ),
                         ),
-                      ),
-                    ],
+                      ],
+                    ),
                   ),
                 ),
               ),
             ),
-          ),
-          Positioned.fill(
-            top: MediaQuery.of(context).size.height * 0.45,
-            child: SingleChildScrollView(
-              child: Padding(
-                padding: EdgeInsets.symmetric(vertical: 20.0),
-                child: Form(
-                  key: _formKey,
-                  child: Column(
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    children: [
-                      _buildTextField(context, 'First Name', Icons.person,
-                          _firstNameController),
-                      SizedBox(height: 10.0),
-                      _buildTextField(context, 'Last Name', Icons.person,
-                          _lastNameController),
-                      SizedBox(height: 10.0),
-                      _buildTextField(context, 'Username', Icons.account_circle,
-                          _usernameController),
-                      SizedBox(height: 10.0),
-                      _buildTextField(
-                          context, 'Gender', Icons.person, _genderController),
-                      SizedBox(height: 10.0),
-                      _buildTextField(
-                          context, 'Age', Icons.cake, _ageController),
-                      SizedBox(height: 10.0),
-                      _buildTextField(
-                          context, 'Email', Icons.email, _emailController),
-                      SizedBox(height: 10.0),
-                      _buildTextField(
-                          context, 'Password', Icons.lock, _passwordController,
-                          isPassword: true),
-                      SizedBox(height: 20.0),
-                      _buildOrangeButton(context, 'Create Your Account',
-                          () => _createAccount(context)),
-                    ],
+            Positioned.fill(
+              top: MediaQuery.of(context).size.height * 0.40,
+              child: SingleChildScrollView(
+                child: Padding(
+                  padding: EdgeInsets.symmetric(vertical: 20.0),
+                  child: Form(
+                    key: _formKey,
+                    child: Column(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: [
+                        _buildTextField(context, 'First Name', Icons.person,
+                            _firstNameController),
+                        SizedBox(height: 10.0),
+                        _buildTextField(context, 'Last Name', Icons.person,
+                            _lastNameController),
+                        SizedBox(height: 10.0),
+                        _buildTextField(context, 'Username',
+                            Icons.account_circle, _usernameController),
+                        SizedBox(height: 10.0),
+                        _buildTextField(
+                            context, 'Gender', Icons.person, _genderController),
+                        SizedBox(height: 10.0),
+                        _buildTextField(
+                            context, 'Age', Icons.cake, _ageController),
+                        SizedBox(height: 10.0),
+                        _buildTextField(
+                            context, 'Email', Icons.email, _emailController),
+                        SizedBox(height: 10.0),
+                        _buildTextField(context, 'Password', Icons.lock,
+                            _passwordController,
+                            isPassword: true),
+                        SizedBox(height: 20.0),
+                        _buildOrangeButton(context, 'Create Your Account',
+                            () => _createAccount(context)),
+                      ],
+                    ),
                   ),
                 ),
               ),
             ),
-          ),
-        ],
-      ),
-    );
+          ],
+        ),
+        bottomNavigationBar: BottomNavigationBar(
+            backgroundColor: Color(0xffc47726),
+            selectedItemColor: Colors.white,
+            unselectedItemColor: Colors.white,
+            currentIndex: 2, // Set the current index to 2 for Cart
+            onTap: (int index) {
+              if (index == 0) {
+                Navigator.pop(context); // Navigate back if Back is tapped
+              } else if (index == 2) {
+                // Do nothing, we are already in the cart page
+              }
+            },
+            items: [
+              BottomNavigationBarItem(
+                icon: Icon(Icons.arrow_back),
+                label: 'Back',
+              ),
+              BottomNavigationBarItem(
+                icon: Icon(Icons.favorite),
+                label: 'Favorites',
+              ),
+              BottomNavigationBarItem(
+                icon: Icon(Icons.shopping_cart),
+                label: 'Cart',
+              )
+            ]));
   }
 
   Widget _buildTextField(BuildContext context, String labelText, IconData icon,
-      TextEditingController controller,
+      TextEditingController _controller,
       {bool isPassword = false}) {
     return Container(
       width: MediaQuery.of(context).size.width * 0.8,
@@ -154,7 +179,7 @@ class CreateAccountScreen extends StatelessWidget {
         borderRadius: BorderRadius.circular(5.0),
       ),
       child: TextFormField(
-        controller: controller,
+        controller: _controller,
         obscureText: isPassword,
         decoration: InputDecoration(
           labelText: labelText,

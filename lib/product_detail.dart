@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 import 'package:project/product_page.dart';
 import 'package:project/cart_management.dart';
 import 'package:project/cart_page.dart';
-import 'package:provider/provider.dart';
 import 'package:project/widget/drawer.dart';
 
 class ProductDetailPage extends StatefulWidget {
@@ -83,11 +83,15 @@ class _ProductDetailPageState extends State<ProductDetailPage> {
                         color: Colors.black54,
                       ),
                     ),
-                    Text(
-                      widget.product.description,
-                      style: TextStyle(
-                        fontSize: 18.0,
-                        color: Colors.black,
+                    Expanded(
+                      child: SingleChildScrollView(
+                        child: Text(
+                          widget.product.description,
+                          style: TextStyle(
+                            fontSize: 18.0,
+                            color: Colors.black,
+                          ),
+                        ),
                       ),
                     ),
                     SizedBox(height: 8.0),

@@ -39,4 +39,9 @@ class Cart with ChangeNotifier {
     return _items.fold(
         0, (total, current) => total + current.price * current.quantity);
   }
+
+  void clearCart() {
+    _items.clear();
+    notifyListeners();
+  }
 }

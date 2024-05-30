@@ -24,15 +24,17 @@ class Product {
   final int id;
   final String title;
   final double price;
+  final String category; // Add this field
   int quantity;
   final String imageUrl;
-  final String description; // New field
-  final Rating rating; // New field
+  final String description;
+  final Rating rating;
 
   Product({
     required this.id,
     required this.title,
     required this.price,
+    required this.category, // Add this field
     this.quantity = 1,
     required this.imageUrl,
     required this.description,
@@ -44,9 +46,10 @@ class Product {
       id: json['id'],
       title: json['title'],
       price: json['price'].toDouble(),
+      category: json['category'], // Parse category field
       imageUrl: json['image'],
-      description: json['description'], // Parse description field
-      rating: Rating.fromJson(json['rating']), // Parse rating field
+      description: json['description'],
+      rating: Rating.fromJson(json['rating']),
     );
   }
 }
@@ -61,7 +64,7 @@ class ProductsPage extends StatefulWidget {
 }
 
 class _ProductsPageState extends State<ProductsPage> {
-  late Future<List<Product>> _futureProducts;
+  late Future<Map<String, List<Product>>> _futureProducts;
 
   @override
   void initState() {
@@ -69,13 +72,24 @@ class _ProductsPageState extends State<ProductsPage> {
     _futureProducts = fetchProducts();
   }
 
-  Future<List<Product>> fetchProducts() async {
+  Future<Map<String, List<Product>>> fetchProducts() async {
     final response =
         await http.get(Uri.parse('https://fakestoreapi.com/products'));
 
     if (response.statusCode == 200) {
       final List<dynamic> data = jsonDecode(response.body);
-      return data.map((json) => Product.fromJson(json)).toList();
+      final List<Product> products =
+          data.map((json) => Product.fromJson(json)).toList();
+
+      final Map<String, List<Product>> categorizedProducts = {};
+      for (var product in products) {
+        if (categorizedProducts.containsKey(product.category)) {
+          categorizedProducts[product.category]!.add(product);
+        } else {
+          categorizedProducts[product.category] = [product];
+        }
+      }
+      return categorizedProducts;
     } else {
       throw Exception('Failed to load products');
     }
@@ -120,14 +134,18 @@ class _ProductsPageState extends State<ProductsPage> {
             ),
             SizedBox(height: 16),
             Expanded(
-              child: FutureBuilder<List<Product>>(
+              child: FutureBuilder<Map<String, List<Product>>>(
                 future: _futureProducts,
                 builder: (context, snapshot) {
                   if (snapshot.connectionState == ConnectionState.waiting) {
                     return Center(child: CircularProgressIndicator());
                   } else if (snapshot.hasError) {
                     return Center(child: Text('Error: ${snapshot.error}'));
+                  } else if (!snapshot.hasData || snapshot.data!.isEmpty) {
+                    return Center(child: Text('No products available.'));
                   } else {
+                    List<Product> filteredProducts =
+                        snapshot.data![widget.category] ?? [];
                     return GridView.builder(
                       gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
                         crossAxisCount: 2,
@@ -135,9 +153,9 @@ class _ProductsPageState extends State<ProductsPage> {
                         mainAxisSpacing: 16,
                         childAspectRatio: 0.60,
                       ),
-                      itemCount: snapshot.data!.length,
+                      itemCount: filteredProducts.length,
                       itemBuilder: (context, index) {
-                        return ProductTile(product: snapshot.data![index]);
+                        return ProductTile(product: filteredProducts[index]);
                       },
                     );
                   }

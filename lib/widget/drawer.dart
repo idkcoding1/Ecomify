@@ -1,8 +1,6 @@
-// app_drawer.dart
 import 'package:flutter/material.dart';
 import 'package:project/create_account_screen.dart'; // Import your RegisterPage
 import 'package:project/widget/contactpage.dart'; // Import your ContactUs page
-import 'package:project/widget/developer.dart'; // Import your Developer page
 
 class AppDrawer extends StatelessWidget {
   @override
@@ -12,54 +10,64 @@ class AppDrawer extends StatelessWidget {
         children: <Widget>[
           const UserAccountsDrawerHeader(
             accountName: Text('Tanveer Hamza'),
-            accountEmail: Text('Hamzatanveer961@gmail.com'),
+            accountEmail: Text('tanveer@gmail.com'),
             currentAccountPicture: CircleAvatar(
-              backgroundColor: Colors.deepPurple,
+              backgroundImage: AssetImage('assets/images/frank.png'),
+              backgroundColor: Color.fromARGB(255, 179, 114, 18),
             ),
           ),
           ListTile(
             title: Text('Register Now'),
             subtitle: Text('Register to get Access to Products'),
-            trailing: OutlinedButton(
-              onPressed: () {
-                Navigator.push(
-                  context,
-                  MaterialPageRoute(
-                    builder: (context) => CreateAccountScreen(),
-                  ),
-                );
-              },
-              child: Text('Register'),
+            trailing: Container(
+              decoration: BoxDecoration(
+                color: Color.fromARGB(255, 194, 199, 187),
+                borderRadius: BorderRadius.circular(10.0), // Rounded corners
+              ),
+              child: TextButton(
+                onPressed: () {
+                  Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                      builder: (context) => CreateAccountScreen(),
+                    ),
+                  );
+                },
+                child: Text('Register'),
+              ),
             ),
           ),
           Divider(height: 0.2),
           ListTile(
             title: Text('Contact Us'),
-            trailing: OutlinedButton(
+            trailing: IconButton(
+              icon: Icon(Icons.contact_support),
               onPressed: () {
                 Navigator.push(
-                  context,
+                  context, // Use context.context for nested navigators
                   MaterialPageRoute(
-                    builder: (context) => Contactus(),
+                    builder: (context) => ContactUs(),
                   ),
                 );
               },
-              child: Text('Contact'),
+              color: Colors.green,
             ),
           ),
           Divider(height: 0.2),
           ListTile(
             title: Text('Know More About Us'),
-            trailing: OutlinedButton(
+            trailing: FloatingActionButton.small(
               onPressed: () {
                 Navigator.push(
                   context,
                   MaterialPageRoute(
-                    builder: (context) => const Developer(),
+                    builder: (context) =>
+                        ContactUs(), // Consider a dedicated About Us page if available
                   ),
                 );
               },
-              child: Text('More'),
+              child: Icon(Icons.info),
+              backgroundColor: Colors.grey[200],
             ),
           ),
         ],

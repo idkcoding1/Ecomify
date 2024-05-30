@@ -3,6 +3,7 @@ import 'package:provider/provider.dart';
 import 'package:project/cart_management.dart';
 import 'package:project/product_page.dart';
 import 'package:project/widget/drawer.dart';
+import 'package:project/PaymentDetailsPage.dart';
 
 class CartPage extends StatelessWidget {
   @override
@@ -13,7 +14,7 @@ class CartPage extends StatelessWidget {
           'Cart',
           style: TextStyle(
             color: Colors.white,
-            fontSize: 24.0, // Set the font size
+            fontSize: 24.0,
           ),
         ),
         backgroundColor: Color(0xffc47726),
@@ -44,18 +45,20 @@ class CartPage extends StatelessWidget {
                 SizedBox(height: 16.0),
                 ElevatedButton(
                   onPressed: () {
-                    // Handle confirm purchase
+                    Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                          builder: (context) => PaymentDetailsPage()),
+                    );
                   },
                   style: ElevatedButton.styleFrom(
                       padding: EdgeInsets.symmetric(vertical: 16.0),
-                      backgroundColor:
-                          Color(0xffc47726) // Set button background color
-                      ),
+                      backgroundColor: Color(0xffc47726)),
                   child: Text(
                     'CONFIRM PURCHASE',
                     style: TextStyle(
-                      fontSize: 20.0, // Set the font size
-                      color: Color(0xffffffff), // Set the text color
+                      fontSize: 20.0,
+                      color: Color(0xffffffff),
                     ),
                   ),
                 ),
@@ -68,10 +71,10 @@ class CartPage extends StatelessWidget {
         backgroundColor: Color(0xffc47726),
         selectedItemColor: Colors.white,
         unselectedItemColor: Colors.white,
-        currentIndex: 2, // Set the current index to 2 for Cart
+        currentIndex: 2,
         onTap: (int index) {
           if (index == 0) {
-            Navigator.pop(context); // Navigate back if Back is tapped
+            Navigator.pop(context);
           } else if (index == 2) {
             // Do nothing, we are already in the cart page
           }
