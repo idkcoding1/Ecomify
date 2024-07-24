@@ -1,19 +1,33 @@
-# Project
+**ECOMIFY **
 
-A new Flutter project created with FlutLab - https://flutlab.io
+**Getting Started**
+Ecommify is a Flutter application that helps buisness owners showcase there products and sell there items.
 
-## Getting Started
+Features
+Register User Page
+Sign In Login Page
+Contains Product each in seperate Categories
+Flutter For Frontend
+Firebase for backend services
+**Prerequisites
+**
+Flutter SDK
+Firebase account
+API key https://dummyjson.com/products
 
-A few resources to get you started if this is your first Flutter project:
+Clone the repository:
 
-- https://flutter.dev/docs/get-started/codelab
-- https://flutter.dev/docs/cookbook
+git clone https://github.com/yourusername/Ecomify.git 
+cd Ecomify
 
-For help getting started with Flutter, view our
-https://flutter.dev/docs, which offers tutorials,
-samples, guidance on mobile development, and a full API reference.
+Initialize Firebase:
 
-## Getting Started: FlutLab - Flutter Online IDE
+Go to the Firebase Console (https://console.firebase.google.com/).
+Create a new project.
+Follow the instructions to add Firebase to your Flutter app.
+Install dependencies: flutter pub get
 
-- How to use FlutLab? Please, view our https://flutlab.io/docs
-- Join the discussion and conversation on https://flutlab.io/residents
+Run the app: flutter run
+
+Contributing
+Contributions are welcome! Please create a pull request or submit an issue if you have any suggestions or find any bugs.
